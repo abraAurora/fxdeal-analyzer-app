@@ -1,10 +1,8 @@
 package com.fxdealanalyzer.configuration;
 
 import com.fxdealanalyzer.repository.FxDealRepository;
-import com.fxdealanalyzer.service.FxDealServiceImpl;
 import com.fxdealanalyzer.service.validation.*;
-import com.fxdealanalyzer.utils.CurrencyCodeUtil;
-import com.fxdealanalyzer.utils.FxDealRequestMapper;
+import com.fxdealanalyzer.utils.CurrencyCodeProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,15 +10,10 @@ import org.springframework.context.annotation.Configuration;
 public class ValidationBeanConfiguration {
 
     @Bean
-    public FxDealService fxDealService(CurrencyCodeUtil currencyCodeUtil, FxDealRepository fxDealRepository, FxDealRequestMapper mapper){
-        return new FxDealRequestDuplicateValidator(
-               new DealDateValidator(
-                       new DealAmountValidator(
-                               new CurrencyIsoCodeValidator(currencyCodeUtil,
-                                       new FxDealServiceImpl(fxDealRepository,mapper)
-                               )
-                       )
-               )
-        ,fxDealRepository);
+    public Validator validator(CurrencyCodeProvider codeProvider, FxDealRepository fxDealRepository) {
+        return new FxDealRequestDuplicateValidator(fxDealRepository,
+                new CurrencyIsoCodeValidator(codeProvider,
+                        new DealAmountValidator()
+                ));
     }
 }

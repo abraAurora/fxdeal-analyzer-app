@@ -1,18 +1,19 @@
 package com.fxdealanalyzer.repository.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 
 @Entity
-@Table(name = "fx_deals",indexes = {
-        @Index(name = "unique_deal_id", columnList = "deal_unique_id", unique = true)
-})
+@Table(name = "fx_deals")
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class FxDealEntity {
 
     @Id

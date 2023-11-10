@@ -1,41 +1,37 @@
 package com.fxdealanalyzer.service.validation;
 
-import com.fxdealanalyzer.repository.entity.FxDealEntity;
-import com.fxdealanalyzer.module.FxDealRequest;
-import com.fxdealanalyzer.module.FxDealResponse;
-import com.fxdealanalyzer.module.FxDealStatus;
+import com.fxdealanalyzer.exception.ValidationException;
+import com.fxdealanalyzer.model.FxDealRequest;
+import com.fxdealanalyzer.model.FxDealStatus;
 import com.fxdealanalyzer.repository.FxDealRepository;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import com.fxdealanalyzer.repository.entity.FxDealEntity;
+import com.fxdealanalyzer.service.FxDealService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Optional;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Slf4j
-public class FxDealRequestDuplicateValidator implements FxDealService{
-    public static final String DEAL_NOT_ACCEPTED_DUPLICATE_ID = "Not accepted because a deal with the same ID already exists in the database";
+public class FxDealRequestDuplicateValidator implements Validator {
 
-    @Autowired
-    private FxDealService fxDealService;
-
-    @Autowired
     private FxDealRepository fxDealRepository;
+
+    private Validator nextValidator;
+
+    public FxDealRequestDuplicateValidator(FxDealRepository fxDealRepository, Validator nextValidator) {
+        this.fxDealRepository = fxDealRepository;
+        this.nextValidator = nextValidator;
+    }
+
     @Override
-    public FxDealResponse accept(FxDealRequest request) {
+    public void validate(FxDealRequest request) throws ValidationException {
         log.info("Querying the database for FX deal with unique ID: {}", request.getDealUniqueId());
         Optional<FxDealEntity> fxDealOptional = fxDealRepository.findByDealUniqueId(request.getDealUniqueId());
         if (fxDealOptional.isPresent()) {
-            return fxDealService.accept(request);
+            log.info("An FX deal with the ID {} already exists in the database: {}", request.getDealUniqueId(), fxDealOptional);
+            throw new ValidationException("Duplicate ID encountered already exists in the database");
         }
-        log.info("An FX deal with the ID {} already exists in the database: {}", request.getDealUniqueId(), fxDealOptional);
+        nextValidator.validate(request);
 
-        return FxDealResponse
-                .builder()
-                .status(FxDealStatus.NOT_ACCEPTED)
-                .description(DEAL_NOT_ACCEPTED_DUPLICATE_ID)
-                .build();
+
     }
 }

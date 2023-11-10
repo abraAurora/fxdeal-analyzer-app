@@ -9,3 +9,5 @@ spring:
     hibernate:
       ddl-auto: update
 
+  flyway:
+    baseline-on-migrate: true

@@ -1,4 +1,4 @@
-package com.fxdealanalyzer.module;
+package com.fxdealanalyzer.model;
 
 import lombok.Builder;
 import lombok.Getter;
