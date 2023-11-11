@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 @Slf4j
 public class DealAmountValidator implements Validator {
 
+    public static final String veryLargeNumber = "987657890";
 
     public DealAmountValidator() {
             }
@@ -27,6 +28,6 @@ public class DealAmountValidator implements Validator {
     }
 
     private boolean isFinite(BigDecimal value) {
-        return !BigDecimal.ZERO.equals(value.ZERO) && !value.equals(BigDecimal.valueOf(Double.POSITIVE_INFINITY)) && !value.equals(BigDecimal.valueOf(Double.NEGATIVE_INFINITY));
+        return !value.equals(BigDecimal.valueOf(Long.parseLong(veryLargeNumber)));
     }
 }

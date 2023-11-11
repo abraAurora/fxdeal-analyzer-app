@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 @SpringBootTest
 public class DealAmountValidatorTest {
+    public static final String veryLargeNumber = "987657890";
 
     @Test
     void testValidDealAmount() throws ValidationException {
@@ -31,7 +32,7 @@ public class DealAmountValidatorTest {
     void testInvalidDealAmount() {
         DealAmountValidator validator = new DealAmountValidator();
 
-        FxDealRequest request = new FxDealRequest("uniqueId", "USD", "EUR", ZonedDateTime.now(), BigDecimal.valueOf(Double.POSITIVE_INFINITY) /* other fields */);
+        FxDealRequest request = new FxDealRequest("uniqueId", "USD", "EUR", ZonedDateTime.now(), BigDecimal.valueOf(Long.parseLong(veryLargeNumber)));
 
         assertThrows(ValidationException.class, () -> validator.validate(request));
     }
