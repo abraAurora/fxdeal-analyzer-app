@@ -9,8 +9,9 @@ import com.fxdealanalyzer.service.validation.Validator;
 import com.fxdealanalyzer.utils.FxDealRequestMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
-@AllArgsConstructor
+@Service
 @Slf4j
 public class FxDealServiceImpl implements FxDealService{
     public static final String DEAL_ACCEPTED_AND_SAVED_SUCCESSFULLY = "Deal is accepted and saved successfully";

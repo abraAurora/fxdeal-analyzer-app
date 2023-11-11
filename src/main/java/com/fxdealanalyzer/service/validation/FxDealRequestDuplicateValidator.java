@@ -2,10 +2,8 @@ package com.fxdealanalyzer.service.validation;
 
 import com.fxdealanalyzer.exception.ValidationException;
 import com.fxdealanalyzer.model.FxDealRequest;
-import com.fxdealanalyzer.model.FxDealStatus;
 import com.fxdealanalyzer.repository.FxDealRepository;
 import com.fxdealanalyzer.repository.entity.FxDealEntity;
-import com.fxdealanalyzer.service.FxDealService;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Optional;

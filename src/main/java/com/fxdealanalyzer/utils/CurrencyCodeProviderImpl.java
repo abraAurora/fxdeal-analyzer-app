@@ -1,10 +1,12 @@
 package com.fxdealanalyzer.utils;
 
+import org.springframework.stereotype.Service;
+
 import java.util.Collections;
 import java.util.Currency;
 import java.util.HashSet;
 import java.util.Set;
-
+@Service
 public class CurrencyCodeProviderImpl implements CurrencyCodeProvider {
     private final Set<String> validCurrencyCodes;
 

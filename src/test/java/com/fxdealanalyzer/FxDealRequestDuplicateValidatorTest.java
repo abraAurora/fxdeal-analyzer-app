@@ -8,6 +8,7 @@ import com.fxdealanalyzer.service.validation.FxDealRequestDuplicateValidator;
 import com.fxdealanalyzer.service.validation.Validator;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
@@ -15,7 +16,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
-
+@SpringBootTest
 public class FxDealRequestDuplicateValidatorTest {
 
     @Test

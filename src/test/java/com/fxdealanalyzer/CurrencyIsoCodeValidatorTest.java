@@ -7,6 +7,7 @@ import com.fxdealanalyzer.service.validation.Validator;
 import com.fxdealanalyzer.utils.CurrencyCodeProvider;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
@@ -14,7 +15,7 @@ import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
-
+@SpringBootTest
 public class CurrencyIsoCodeValidatorTest {
 
     @Test

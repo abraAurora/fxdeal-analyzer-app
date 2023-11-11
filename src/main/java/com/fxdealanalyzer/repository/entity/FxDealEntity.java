@@ -11,8 +11,6 @@ import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "fx_deals")
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
 public class FxDealEntity {
 

@@ -10,10 +10,14 @@ import com.fxdealanalyzer.utils.CurrencyCodeProvider;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
-
+@SpringBootTest
 public class ValidatorTest {
     private CurrencyCodeProvider currencyCodeProvider;
     @Mock
@@ -25,7 +29,7 @@ public class ValidatorTest {
         CurrencyIsoCodeValidator codeValidator = new CurrencyIsoCodeValidator(currencyCodeProvider, dealAmountValidator);
         FxDealRequestDuplicateValidator duplicateValidator = new FxDealRequestDuplicateValidator(fxDealRepository, codeValidator);
 
-        FxDealRequest request = new FxDealRequest();
+        FxDealRequest request = new FxDealRequest("uniqueId", "USD", "EUR", ZonedDateTime.now(), BigDecimal.valueOf(10.9));
 
         doNothing().when(dealAmountValidator).validate(request);
 
@@ -44,7 +48,7 @@ public class ValidatorTest {
         FxDealRequestDuplicateValidator duplicateValidator = new FxDealRequestDuplicateValidator(fxDealRepository, codeValidator);
 
 
-        FxDealRequest request = new FxDealRequest();
+        FxDealRequest request = new FxDealRequest("uniqueId", "USD", "EUR", ZonedDateTime.now(), BigDecimal.valueOf(10.9));
 
         doThrow(new ValidationException("Validation failed in codeValidator")).when(codeValidator).validate(request);
 

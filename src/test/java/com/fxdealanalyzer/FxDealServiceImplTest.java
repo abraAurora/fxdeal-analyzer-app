@@ -13,12 +13,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-
+@SpringBootTest
 class FxDealServiceImplTest {
 
     @Mock
@@ -41,7 +44,7 @@ class FxDealServiceImplTest {
     @Test
     void accept_ValidDeal_ReturnsAcceptedResponse() throws ValidationException {
         // Arrange
-        FxDealRequest request = new FxDealRequest(/* provide valid input */);
+        FxDealRequest request = new FxDealRequest("uniqueId", "USD", "EUR", ZonedDateTime.now(), BigDecimal.valueOf(10.9));
 
         // Mock the behavior of validator and repository
         doNothing().when(validatorChain).validate(request);
@@ -63,7 +66,7 @@ class FxDealServiceImplTest {
     @Test
     void accept_InvalidDeal_ThrowsValidationException() throws ValidationException {
         // Arrange
-        FxDealRequest request = new FxDealRequest(/* provide invalid input */);
+        FxDealRequest request = new FxDealRequest("uniqueId", "USD", "EUR", ZonedDateTime.now(), BigDecimal.valueOf(10.9));
 
         // Mock the behavior of validator to throw an exception
         doThrow(new ValidationException("Invalid deal")).when(validatorChain).validate(request);

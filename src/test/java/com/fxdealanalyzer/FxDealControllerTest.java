@@ -14,6 +14,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.math.BigDecimal;
+import java.time.ZonedDateTime;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -26,7 +29,7 @@ public class FxDealControllerTest {
 
     @Test
     void testAcceptFxDeal() throws ValidationException {
-        FxDealRequest request = new FxDealRequest();
+        FxDealRequest request = new FxDealRequest("uniqueId", "USD", "EUR", ZonedDateTime.now(), BigDecimal.valueOf(10.9));
         FxDealResponse mockResponse = FxDealResponse.builder()
                 .status(FxDealStatus.ACCEPTED)
                 .build();
