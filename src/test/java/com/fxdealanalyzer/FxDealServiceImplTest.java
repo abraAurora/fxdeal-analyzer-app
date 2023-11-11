@@ -55,7 +55,7 @@ class FxDealServiceImplTest {
 
         // Assert
         assertNotNull(response);
-        assertEquals(FxDealStatus.ACCEPTED, response.getStatus());
+        assertEquals(FxDealStatus.Deal_Accepted, response.getStatus());
         assertEquals(FxDealServiceImpl.DEAL_ACCEPTED_AND_SAVED_SUCCESSFULLY, response.getDescription());
 
         // Verify that methods were called

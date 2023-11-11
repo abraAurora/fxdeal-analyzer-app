@@ -12,7 +12,6 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
@@ -31,7 +30,7 @@ public class FxDealControllerTest {
     void testAcceptFxDeal() throws ValidationException {
         FxDealRequest request = new FxDealRequest("uniqueId", "USD", "EUR", ZonedDateTime.now(), BigDecimal.valueOf(10.9));
         FxDealResponse mockResponse = FxDealResponse.builder()
-                .status(FxDealStatus.ACCEPTED)
+                .status(FxDealStatus.Deal_Accepted)
                 .build();
 
         when(fxDealService.accept(request)).thenReturn(mockResponse);

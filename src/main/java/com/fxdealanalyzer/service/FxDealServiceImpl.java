@@ -7,7 +7,6 @@ import com.fxdealanalyzer.model.FxDealStatus;
 import com.fxdealanalyzer.repository.FxDealRepository;
 import com.fxdealanalyzer.service.validation.Validator;
 import com.fxdealanalyzer.utils.FxDealRequestMapper;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +28,7 @@ public class FxDealServiceImpl implements FxDealService{
         fxDealRepository.save(mapper.toEntity(request));
         return FxDealResponse
                 .builder()
-                .status(FxDealStatus.ACCEPTED)
+                .status(FxDealStatus.Deal_Accepted)
                 .description(DEAL_ACCEPTED_AND_SAVED_SUCCESSFULLY)
                 .build();
     }

@@ -1,5 +1,5 @@
 package com.fxdealanalyzer.model;
 
 public enum FxDealStatus {
-    ACCEPTED,
+    Deal_Accepted,
 }
